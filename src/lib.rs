@@ -48,3 +48,27 @@ pub fn run() {
     println!("{:?}", test);
     println!("{:?}", test.biases[0][(0, 0)]);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_network_initialization() {
+        let sizes = vec![6, 3, 4, 5];
+        let mut net = Network::new(sizes);
+
+        assert_eq!(net.biases.pop().unwrap().dim(), (5, 1));
+        assert_eq!(net.biases.pop().unwrap().dim(), (4, 1));
+        assert_eq!(net.biases.pop().unwrap().dim(), (3, 1));
+        assert!(net.biases.is_empty());
+
+        assert_eq!(net.weights.pop().unwrap().dim(), (5, 4));
+        assert_eq!(net.weights.pop().unwrap().dim(), (4, 3));
+        assert_eq!(net.weights.pop().unwrap().dim(), (3, 6));
+        assert!(net.weights.is_empty());
+
+        assert_eq!(net.sizes, vec![6, 3, 4, 5]);
+        assert_eq!(net.num_layers, 4);
+    }
+}
