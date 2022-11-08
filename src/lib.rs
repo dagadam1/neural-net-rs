@@ -1,4 +1,4 @@
-use ndarray::{Array, Array2};
+use ndarray::{Array, Array2, ArcArray2};
 use rand::{Rng, thread_rng};
 
 #[derive(Debug)]
@@ -40,6 +40,15 @@ impl Network {
             biases,
             weights,
         }
+    }
+
+    fn feedforward(self, mut a: Array2<f64>) -> Array2<f64>  {
+        let weights = self.weights.iter();
+        let biases = self.biases.iter();
+        for (b, w) in weights.zip(biases) {
+            a = sigmoid(w.dot(&a) + b);
+        }
+        a
     }
 }
 
