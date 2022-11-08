@@ -49,6 +49,12 @@ pub fn run() {
     println!("{:?}", test.biases[0][(0, 0)]);
 }
 
+fn sigmoid(z: Array2<f64>) -> Array2<f64> {
+    z.map(|x| {
+        1.0/(1.0+x.exp())
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
