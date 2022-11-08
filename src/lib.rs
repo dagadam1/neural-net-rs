@@ -1,5 +1,5 @@
-use ndarray::{Array, Array1, Array2, ArrayView, Dim, IntoDimension};
-use rand::{Rng, Fill, thread_rng};
+use ndarray::{Array, Array2};
+use rand::{Rng, thread_rng};
 
 #[derive(Debug)]
 struct Network {
